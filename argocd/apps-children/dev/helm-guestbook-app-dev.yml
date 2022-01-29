@@ -11,6 +11,6 @@ spec:
     name: in-cluster
   project: appbundle-project-dev
   source:
-    path: kustomized_helm/overlays/dev
+    path: /apps
     repoURL: https://github.com/cbrech/argocd-example-apps.git
     targetRevision: HEAD
