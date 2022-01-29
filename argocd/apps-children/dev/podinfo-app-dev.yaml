@@ -18,8 +18,7 @@ spec:
                 automated:
                   prune: true
                   selfHeal: true
-  annotations:
-    argocd.argoproj.io/sync-options: PruneLast=true
+
 
 ---
 apiVersion: v1
