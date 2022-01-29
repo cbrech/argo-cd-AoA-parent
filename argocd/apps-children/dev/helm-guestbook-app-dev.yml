@@ -14,3 +14,9 @@ spec:
     path: /apps
     repoURL: https://github.com/cbrech/argocd-example-apps.git
     targetRevision: HEAD
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Namespace
+metadata:
+  name: guestbook
