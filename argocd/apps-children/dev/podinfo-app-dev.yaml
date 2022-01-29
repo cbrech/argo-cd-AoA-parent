@@ -42,6 +42,7 @@ spec:
     - istio-system/public
   hosts:
    - codefire.bigbang.dev
+   - podinfo.militarycoders.us
   http:
   - route:
     - destination:
