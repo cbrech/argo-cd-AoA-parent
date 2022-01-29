@@ -40,7 +40,7 @@ spec:
   gateways:
     - istio-system/public
   hosts:
-   - guestbook.bigbang.dev
+   - guestbook.militarycoders.us
   http:
   - route:
     - destination:
