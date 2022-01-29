@@ -16,7 +16,11 @@ spec:
     targetRevision: HEAD
 
 ---
-apiVersion: argoproj.io/v1alpha1
+apiVersion: v1
 kind: Namespace
 metadata:
+  labels:
+    app.kubernetes.io/managed-by: argocd
+    app.kubernetes.io/name: guestbook
+    app.kubernetes.io/component: namespace
   name: guestbook
