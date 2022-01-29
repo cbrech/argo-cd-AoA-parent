@@ -30,12 +30,11 @@ metadata:
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
- name: guestbook
+ name: guestbook-ui
  namespace: guestbook-dev
-
 spec:
   gateways:
-    - "istio-system/public"
+    - istio-system/public
   hosts:
    - guestbook.bigbang.dev
   http:
