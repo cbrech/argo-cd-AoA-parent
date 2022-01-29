@@ -46,5 +46,5 @@ spec:
   - route:
     - destination:
         port:
-          number: 80
+          number: 9898
         host: podinfo-app-dev
