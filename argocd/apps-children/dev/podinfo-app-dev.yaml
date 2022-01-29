@@ -36,7 +36,7 @@ spec:
   gateways:
     - istio-system/public
   hosts:
-   - codefirebigbang.dev
+   - codefire.bigbang.dev
   http:
   - route:
     - destination:
