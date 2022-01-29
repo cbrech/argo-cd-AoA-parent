@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: podinfo-app-dev
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: podinfo-dev
+    name: in-cluster
+  project: appbundle-project-dev
+  source:
+    path: ./chart
+    repoURL: https://repo1.dso.mil/platform-one/big-bang/apps/sandbox/podinfo.git
+    targetRevision: 6.0.0-bb.4
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: argocd
+    app.kubernetes.io/name: podinfo-dev
+    app.kubernetes.io/component: namespace
+  name: podinfo-dev
+  
+---
+  
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+ name: podinfo
+ namespace: podinfo-dev
+spec:
+  gateways:
+    - istio-system/public
+  hosts:
+   - codefirebigbang.dev
+  http:
+  - route:
+    - destination:
+        port:
+          number: 80
+        host: podinfo
