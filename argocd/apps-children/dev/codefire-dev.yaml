@@ -23,7 +23,7 @@ metadata:
     app.kubernetes.io/managed-by: argocd
     app.kubernetes.io/name: codefire-dev
     app.kubernetes.io/component: namespace
-  name: guestbook-dev
+  name: codefire-dev
   
 ---
   
