@@ -12,5 +12,5 @@ spec:
   project: appbundle-project-dev
   source:
     path: kustomized_helm/overlays/dev
-    repoURL: https://github.com/d0-labs/argocd-app-of-apps-child-guestbook
+    repoURL: https://github.com/cbrech/argocd-example-apps.git
     targetRevision: HEAD
