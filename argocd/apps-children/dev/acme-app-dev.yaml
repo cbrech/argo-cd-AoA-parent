@@ -1,18 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: demo-dev
+  name: robot-dev
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: demo-dev
+    namespace: robot-dev
     name: in-cluster
   project: appbundle-project-dev
   source:
-    path: ./kubernetes-manifests/
-    repoURL: https://github.com/GoogleCloudPlatform/microservices-demo.git
+    path: ./K8s/helm/
+    repoURL: https://github.com/instana/robot-shop.git
     targetRevision: HEAD
   syncPolicy:
                 automated:
@@ -25,25 +25,25 @@ kind: Namespace
 metadata:
   labels:
     app.kubernetes.io/managed-by: argocd
-    app.kubernetes.io/name: demo-dev
+    app.kubernetes.io/name: robot-dev
     app.kubernetes.io/component: namespace
-  name: demo-dev
+  name: robot-dev
   
 ---
   
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
- name: demo
- namespace: demo-dev
+ name: robot
+ namespace: robot-dev
 spec:
   gateways:
     - istio-system/public
   hosts:
-   - demo.militarycoders.us
+   - robot.militarycoders.us
   http:
   - route:
     - destination:
         port:
           number: 80
-        host: demo
+        host: robot
