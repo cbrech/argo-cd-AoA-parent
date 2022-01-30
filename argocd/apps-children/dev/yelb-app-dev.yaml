@@ -1,18 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: helm-guestbook-app-dev
+  name: yelb-dev
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: guestbook-dev
+    namespace: yelb-dev
     name: in-cluster
   project: appbundle-project-dev
   source:
-    path: ./guestbook
-    repoURL: https://github.com/cbrech/argocd-example-apps.git
+    path: ./deployments/platformdeployment/Kubernetes/chart/yelb/
+    repoURL: https://github.com/mreferre/yelb.git
     targetRevision: HEAD
   syncPolicy:
                 automated:
@@ -25,17 +25,17 @@ kind: Namespace
 metadata:
   labels:
     app.kubernetes.io/managed-by: argocd
-    app.kubernetes.io/name: guestbook-dev
+    app.kubernetes.io/name: yelb-dev
     app.kubernetes.io/component: namespace
-  name: guestbook-dev
+  name: yelb-dev
   
 ---
   
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
- name: guestbook-ui
- namespace: guestbook-dev
+ name: yelb
+ namespace: yelb-dev
 spec:
   gateways:
     - istio-system/public
@@ -46,4 +46,4 @@ spec:
     - destination:
         port:
           number: 80
-        host: guestbook-ui
+        host: yelb
