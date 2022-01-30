@@ -14,14 +14,15 @@ spec:
     path: ./K8s/helm/
     repoURL: https://github.com/instana/robot-shop.git
     targetRevision: HEAD
+    helm:
+      values: |
+          image:
+            version: 2.1.0
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-  helm:
-    values: |
-        image:
-          version: 2.1.0
+  
 
 
 ---
