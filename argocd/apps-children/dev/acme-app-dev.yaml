@@ -18,7 +18,7 @@ spec:
       values: |
           image:
             version: 2.1.0
-          openshift
+          openshift:
             true
   syncPolicy:
     automated:
