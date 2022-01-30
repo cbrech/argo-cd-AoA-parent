@@ -15,9 +15,11 @@ spec:
     repoURL: https://github.com/instana/robot-shop.git
     targetRevision: HEAD
   syncPolicy:
-                automated:
-                  prune: true
-                  selfHeal: true
+    automated:
+      prune: true
+      selfHeal: true
+  image:
+    version: 2.1.0
 
 ---
 apiVersion: v1
