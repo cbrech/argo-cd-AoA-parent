@@ -1,82 +1,82 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: robot-dev
-  namespace: argocd
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
-spec:
-  destination:
-    namespace: robot-dev
-    name: in-cluster
-  project: appbundle-project-dev
-  source:
-    path: ./K8s/helm/
-    repoURL: https://github.com/instana/robot-shop.git
-    targetRevision: HEAD
-    helm:
-      values: |
-          image:
-            version: 2.1.0
-          openshift:
-            true
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: robot-dev
+#   namespace: argocd
+#   finalizers:
+#   - resources-finalizer.argocd.argoproj.io
+# spec:
+#   destination:
+#     namespace: robot-dev
+#     name: in-cluster
+#   project: appbundle-project-dev
+#   source:
+#     path: ./K8s/helm/
+#     repoURL: https://github.com/instana/robot-shop.git
+#     targetRevision: HEAD
+#     helm:
+#       values: |
+#           image:
+#             version: 2.1.0
+#           openshift:
+#             true
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
   
 
 
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  labels:
-    app.kubernetes.io/managed-by: argocd
-    app.kubernetes.io/name: robot-dev
-    app.kubernetes.io/component: namespace
-  name: robot-dev
+# ---
+# apiVersion: v1
+# kind: Namespace
+# metadata:
+#   labels:
+#     app.kubernetes.io/managed-by: argocd
+#     app.kubernetes.io/name: robot-dev
+#     app.kubernetes.io/component: namespace
+#   name: robot-dev
   
----
+# ---
   
-apiVersion: networking.istio.io/v1beta1
-kind: VirtualService
-metadata:
- name: robot
- namespace: robot-dev
-spec:
-  gateways:
-    - istio-system/public
-  hosts:
-   - robot.militarycoders.us
-  http:
-  - route:
-    - destination:
-        port:
-          number: 8080
-        host: web
+# apiVersion: networking.istio.io/v1beta1
+# kind: VirtualService
+# metadata:
+#  name: robot
+#  namespace: robot-dev
+# spec:
+#   gateways:
+#     - istio-system/public
+#   hosts:
+#    - robot.militarycoders.us
+#   http:
+#   - route:
+#     - destination:
+#         port:
+#           number: 8080
+#         host: web
 
----
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: standard
-provisioner: kubernetes.io/no-provisioner
-volumeBindingMode: WaitForFirstConsumer
+# ---
+# apiVersion: storage.k8s.io/v1
+# kind: StorageClass
+# metadata:
+#   name: standard
+# provisioner: kubernetes.io/no-provisioner
+# volumeBindingMode: WaitForFirstConsumer
 
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: task-pv-volume
-  labels:
-    type: local
-spec:
-  storageClassName: standard
-  capacity:
-    storage: 10Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/mnt/data"
+# ---
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: task-pv-volume
+#   labels:
+#     type: local
+# spec:
+#   storageClassName: standard
+#   capacity:
+#     storage: 10Gi
+#   accessModes:
+#     - ReadWriteOnce
+#   hostPath:
+#     path: "/mnt/data"
 
