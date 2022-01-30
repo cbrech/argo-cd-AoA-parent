@@ -18,8 +18,11 @@ spec:
     automated:
       prune: true
       selfHeal: true
-  image:
-    version: 2.1.0
+  helm:
+    values: |
+        image:
+          version: 2.1.0
+
 
 ---
 apiVersion: v1
