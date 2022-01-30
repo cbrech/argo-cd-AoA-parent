@@ -53,8 +53,8 @@ spec:
   - route:
     - destination:
         port:
-          number: 80
-        host: robot
+          number: 8080
+        host: web
 
 ---
 apiVersion: storage.k8s.io/v1
