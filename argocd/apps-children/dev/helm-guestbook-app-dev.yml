@@ -38,7 +38,7 @@ metadata:
  namespace: guestbook-dev
 spec:
   gateways:
-    - istio-system/public
+    - istio-system/passthrough
   hosts:
    - guestbook.militarycoders.us
   http:
