@@ -1,18 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: acme-dev
+  name: demo-dev
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: acme-dev
+    namespace: demo-dev
     name: in-cluster
   project: appbundle-project-dev
   source:
     path: ./kubernetes-manifests/
-    repoURL: https://github.com/vmwarecloudadvocacy/acme_fitness_demo.git
+    repoURL: https://github.com/GoogleCloudPlatform/microservices-demo.git
     targetRevision: HEAD
   syncPolicy:
                 automated:
@@ -25,25 +25,25 @@ kind: Namespace
 metadata:
   labels:
     app.kubernetes.io/managed-by: argocd
-    app.kubernetes.io/name: acme-dev
+    app.kubernetes.io/name: demo-dev
     app.kubernetes.io/component: namespace
-  name: acme-dev
+  name: demo-dev
   
 ---
   
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
- name: acme
- namespace: acme-dev
+ name: demo
+ namespace: demo-dev
 spec:
   gateways:
     - istio-system/public
   hosts:
-   - acme.militarycoders.us
+   - demo.militarycoders.us
   http:
   - route:
     - destination:
         port:
           number: 80
-        host: acme
+        host: demo
