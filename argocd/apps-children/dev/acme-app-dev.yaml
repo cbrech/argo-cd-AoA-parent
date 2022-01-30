@@ -65,13 +65,18 @@ provisioner: kubernetes.io/no-provisioner
 volumeBindingMode: WaitForFirstConsumer
 
 ---
-
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: foo-pv
+  name: task-pv-volume
+  labels:
+    type: local
 spec:
-  storageClassName: "standard"
-  claimRef:
-    name: foo-pvc
-    namespace: robot-dev
+  storageClassName: manual
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
+  namespace: robot-dev
