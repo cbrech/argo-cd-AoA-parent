@@ -19,7 +19,7 @@ spec:
           image:
             version: 2.1.0
           redis:
-            storageClassName: local-storage
+            storageClassName: standard
   syncPolicy:
     automated:
       prune: true
@@ -60,6 +60,6 @@ spec:
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: local-storage
+  name: standard
 provisioner: kubernetes.io/no-provisioner
 volumeBindingMode: WaitForFirstConsumer
