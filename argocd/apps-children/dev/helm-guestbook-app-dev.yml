@@ -1,49 +1,49 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: helm-guestbook-app-dev
-  namespace: argocd
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
-spec:
-  destination:
-    namespace: guestbook-dev
-    name: in-cluster
-  project: appbundle-project-dev
-  source:
-    path: ./guestbook
-    repoURL: https://github.com/cbrech/argocd-example-apps.git
-    targetRevision: HEAD
-  syncPolicy:
-                automated:
-                  prune: true
-                  selfHeal: true
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: helm-guestbook-app-dev
+#   namespace: argocd
+#   finalizers:
+#   - resources-finalizer.argocd.argoproj.io
+# spec:
+#   destination:
+#     namespace: guestbook-dev
+#     name: in-cluster
+#   project: appbundle-project-dev
+#   source:
+#     path: ./guestbook
+#     repoURL: https://github.com/cbrech/argocd-example-apps.git
+#     targetRevision: HEAD
+#   syncPolicy:
+#                 automated:
+#                   prune: true
+#                   selfHeal: true
 
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  labels:
-    app.kubernetes.io/managed-by: argocd
-    app.kubernetes.io/name: guestbook-dev
-    app.kubernetes.io/component: namespace
-  name: guestbook-dev
+# ---
+# apiVersion: v1
+# kind: Namespace
+# metadata:
+#   labels:
+#     app.kubernetes.io/managed-by: argocd
+#     app.kubernetes.io/name: guestbook-dev
+#     app.kubernetes.io/component: namespace
+#   name: guestbook-dev
   
----
+# ---
   
-apiVersion: networking.istio.io/v1beta1
-kind: VirtualService
-metadata:
- name: guestbook-ui
- namespace: guestbook-dev
-spec:
-  gateways:
-    - istio-system/public
-  hosts:
-   - guestbook.militarycoders.us
-  http:
-  - route:
-    - destination:
-        port:
-          number: 80
-        host: guestbook-ui
+# apiVersion: networking.istio.io/v1beta1
+# kind: VirtualService
+# metadata:
+#  name: guestbook-ui
+#  namespace: guestbook-dev
+# spec:
+#   gateways:
+#     - istio-system/public
+#   hosts:
+#    - guestbook.militarycoders.us
+#   http:
+#   - route:
+#     - destination:
+#         port:
+#           number: 80
+#         host: guestbook-ui
