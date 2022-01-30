@@ -18,8 +18,8 @@ spec:
       values: |
           image:
             version: 2.1.0
-          redis:
-            storageClassName: standard
+          openshift
+            true
   syncPolicy:
     automated:
       prune: true
