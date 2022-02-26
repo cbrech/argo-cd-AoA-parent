@@ -41,7 +41,7 @@ spec:
   gateways:
     - istio-system/public
   hosts:
-   - podinfo.militarycoders.us
+   - podinfo.bigbang.dev
   http:
   - route:
     - destination:
