@@ -11,7 +11,7 @@ spec:
     name: in-cluster
   project: appbundle-project-dev
   source:
-    path: ./releases
+    path: ./release
     repoURL: https://github.com/GoogleCloudPlatform/microservices-demo.git
     targetRevision: v0.3.6
   syncPolicy:
