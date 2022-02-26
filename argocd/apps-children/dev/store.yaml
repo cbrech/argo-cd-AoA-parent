@@ -12,8 +12,8 @@ spec:
   project: appbundle-project-dev
   source:
     path: ./release
-    repoURL: https://github.com/GoogleCloudPlatform/microservices-demo.git
-    targetRevision: v0.3.6
+    repoURL: https://github.com/cbrech/microservices-demo.git
+    targetRevision: main
   syncPolicy:
                 automated:
                   prune: true
