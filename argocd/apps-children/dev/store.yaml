@@ -46,5 +46,5 @@ spec:
   - route:
     - destination:
         port:
-          number: 9898
+          number: 80
         host: store-dev
