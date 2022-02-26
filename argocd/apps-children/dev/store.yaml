@@ -1,0 +1,50 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: store-dev
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: store-dev
+    name: in-cluster
+  project: appbundle-project-dev
+  source:
+    path: ./releases
+    repoURL: https://github.com/GoogleCloudPlatform/microservices-demo.git
+    targetRevision: v0.3.6
+  syncPolicy:
+                automated:
+                  prune: true
+                  selfHeal: true
+
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: argocd
+    app.kubernetes.io/name: store-dev
+    app.kubernetes.io/component: namespace
+  name: store-dev
+  
+---
+  
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+ name: store
+ namespace: store-dev
+spec:
+  gateways:
+    - istio-system/public
+  hosts:
+   - store.militarycoders.us
+  http:
+  - route:
+    - destination:
+        port:
+          number: 9898
+        host: store-dev
