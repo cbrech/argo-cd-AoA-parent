@@ -1,17 +1,19 @@
+
+
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: podinfo-app-dev
+  name: store-app-dev
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: podinfo-dev
+    namespace: store
     name: in-cluster
   project: appbundle-project
   source:
-    path: ./apps/podinfo
+    path: ./apps/store
     repoURL: https://github.com/cbrech/argo-cd-AoA-parent.git
     targetRevision: HEAD
   syncPolicy:

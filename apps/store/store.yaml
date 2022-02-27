@@ -1,15 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: store-dev
+  name: store
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: store-dev
+    namespace: store
     name: in-cluster
-  project: appbundle-project-dev
+  project: appbundle-project
   source:
     path: ./release
     repoURL: https://github.com/cbrech/microservices-demo.git
@@ -26,9 +26,9 @@ kind: Namespace
 metadata:
   labels:
     app.kubernetes.io/managed-by: argocd
-    app.kubernetes.io/name: store-dev
+    app.kubernetes.io/name: store
     app.kubernetes.io/component: namespace
-  name: store-dev
+  name: store
   
 ---
   
@@ -36,7 +36,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
  name: store
- namespace: store-dev
+ namespace: store
 spec:
   gateways:
     - istio-system/public
