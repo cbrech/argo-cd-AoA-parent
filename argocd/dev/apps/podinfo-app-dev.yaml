@@ -1,0 +1,22 @@
+
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: podinfo-app-dev
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: podinfo-dev
+    name: in-cluster
+  project: appbundle-project-dev
+  source:
+    path: ./apps/podinfo
+    repoURL: https://github.com/cbrech/argo-cd-AoA-parent.git
+    targetRevision: HEAD
+  syncPolicy:
+                automated:
+                  prune: true
+                  selfHeal: true
