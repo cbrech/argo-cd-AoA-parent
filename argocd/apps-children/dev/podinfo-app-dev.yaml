@@ -1,4 +1,4 @@
-{{- if (default .Values.podinfo true) -}}
+
 
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -20,10 +20,10 @@ spec:
                 automated:
                   prune: true
                   selfHeal: true
-{{- end }}
+
 
 ---
-{{- if (default .Values.podinfo true) -}}
+
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -32,9 +32,9 @@ metadata:
     app.kubernetes.io/name: podinfo-dev
     app.kubernetes.io/component: namespace
   name: podinfo-dev
-{{- end }}
+
 ---
-{{- if (default .Values.podinfo true) -}}
+
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
@@ -51,4 +51,3 @@ spec:
         port:
           number: 9898
         host: podinfo-app-dev
-{{- end }}
