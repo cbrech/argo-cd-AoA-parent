@@ -1,22 +1,20 @@
-
-
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: store-app-dev
-  namespace: argocd
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
-spec:
-  destination:
-    namespace: store
-    name: in-cluster
-  project: appbundle-project
-  source:
-    path: ./apps/store
-    repoURL: https://github.com/cbrech/argo-cd-AoA-parent.git
-    targetRevision: HEAD
-  syncPolicy:
-                automated:
-                  prune: true
-                  selfHeal: true
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: store-app-dev
+#   namespace: argocd
+#   finalizers:
+#   - resources-finalizer.argocd.argoproj.io
+# spec:
+#   destination:
+#     namespace: store
+#     name: in-cluster
+#   project: appbundle-project
+#   source:
+#     path: ./apps/store
+#     repoURL: https://github.com/cbrech/argo-cd-AoA-parent.git
+#     targetRevision: HEAD
+#   syncPolicy:
+#                 automated:
+#                   prune: true
+#                   selfHeal: true
