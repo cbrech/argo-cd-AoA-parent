@@ -1,29 +1,29 @@
-# apiVersion: v1
-# kind: Namespace
-# metadata:
-#   labels:
-#     app.kubernetes.io/managed-by: argocd
-#     app.kubernetes.io/name: takserver
-#     app.kubernetes.io/component: namespace
-#   name: takserver
-# ---
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: takserver-app-dev
-#   namespace: argocd
-#   finalizers:
-#   - resources-finalizer.argocd.argoproj.io
-# spec:
-#   destination:
-#     namespace: takserver
-#     name: in-cluster
-#   project: appbundle-project
-#   source:
-#     path: ./apps/takserver
-#     repoURL: https://github.com/cbrech/argo-cd-AoA-parent.git
-#     targetRevision: HEAD
-#   syncPolicy:
-#                 automated:
-#                   prune: true
-#                   selfHeal: true
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: argocd
+    app.kubernetes.io/name: takserver
+    app.kubernetes.io/component: namespace
+  name: takserver
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: takserver-app-dev
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: takserver
+    name: in-cluster
+  project: appbundle-project
+  source:
+    path: ./apps/takserver
+    repoURL: https://github.com/cbrech/argo-cd-AoA-parent.git
+    targetRevision: HEAD
+  syncPolicy:
+                automated:
+                  prune: true
+                  selfHeal: true
