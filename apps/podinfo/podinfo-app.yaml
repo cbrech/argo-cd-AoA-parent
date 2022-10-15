@@ -16,6 +16,11 @@ spec:
     path: ./chart
     repoURL: https://repo1.dso.mil/platform-one/big-bang/apps/sandbox/podinfo.git
     targetRevision: 6.0.0-bb.4
+  values:
+    ui:
+    color: "#dddddd"
+    message: "Hi"
+    logo: ""
   syncPolicy:
                 automated:
                   prune: true
