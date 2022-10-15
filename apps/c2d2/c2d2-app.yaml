@@ -1,0 +1,53 @@
+
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: c2d2-app
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: c2d2
+    name: in-cluster
+  project: appbundle-project
+  source:
+    path: ./chart
+    repoURL: https://repo1.dso.mil/cbrechbuhl/c2d2.git
+    targetRevision: main
+  syncPolicy:
+                automated:
+                  prune: true
+                  selfHeal: true
+
+
+---
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: argocd
+    app.kubernetes.io/name: c2d2
+    app.kubernetes.io/component: namespace
+  name: c2d2
+
+---
+
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+ name: c2d2
+ namespace: c2d2
+spec:
+  gateways:
+    - istio-system/public
+  hosts:
+   - c2d2.bigbang.dev
+  http:
+  - route:
+    - destination:
+        port:
+          number: 9898
+        host: c2d2-app
