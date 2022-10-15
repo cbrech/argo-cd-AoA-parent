@@ -16,6 +16,12 @@ spec:
     path: ./chart
     repoURL: https://repo1.dso.mil/cbrechbuhl/c2d2.git
     targetRevision: main
+    helm:
+      parameters:
+        - name: ui.color
+          value: "dddddd"
+        - name: ui.message
+          value: "Hi"
   syncPolicy:
                 automated:
                   prune: true
