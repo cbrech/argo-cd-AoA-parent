@@ -11,7 +11,7 @@ spec:
     name: in-cluster
   project: appbundle-project
   source:
-    path: ./
+    path: ./src/takserver-cluster/deployments/helm
     repoURL: https://github.com/cbrech/takserver.git
     targetRevision: main
   syncPolicy:
