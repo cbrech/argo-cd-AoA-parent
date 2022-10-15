@@ -19,7 +19,7 @@ spec:
     helm:
       parameters:
         - name: ui.color
-          value: "dddddd"
+          value: "#dddddd"
         - name: ui.message
           value: "Hi"
   syncPolicy:
