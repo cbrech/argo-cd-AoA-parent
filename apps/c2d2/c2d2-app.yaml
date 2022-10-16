@@ -38,15 +38,9 @@ spec:
     name: in-cluster
   project: appbundle-project
   source:
-    path: ./chart
-    repoURL: https://repo1.dso.mil/platform-one/big-bang/apps/sandbox/mongodb.git
+    path: ./charts/bitnami/mongodb
+    repoURL: https://github.com/bitnami/charts.git
     targetRevision: main
-    helm:
-      parameters:
-        - name: image.tag
-          value: 6.0.1
-        - name: image.repository
-          value: docker.io/library/mongo
   syncPolicy:
                 automated:
                   prune: true
