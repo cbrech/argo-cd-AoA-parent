@@ -47,7 +47,7 @@ metadata:
   name: mongodb
 spec:
   selector:
-    app: c2d2-mongodb
+    app: c2d2-mongo-mongodb
   ports:
   - name: mongodb
     port: 27017
@@ -87,7 +87,7 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
- name: c2d2-mongo
+ name: mongodb
  namespace: c2d2
 spec:
   gateways:
