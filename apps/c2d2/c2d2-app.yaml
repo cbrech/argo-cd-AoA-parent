@@ -25,26 +25,30 @@ spec:
                   prune: true
                   selfHeal: true
 ---
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: c2d2-mongo
-#   namespace: argocd
-#   finalizers:
-#   - resources-finalizer.argocd.argoproj.io
-# spec:
-#   destination:
-#     namespace: c2d2
-#     name: in-cluster
-#   project: appbundle-project
-#   source:
-#     path: ./chart
-#     repoURL: https://repo1.dso.mil/platform-one/big-bang/apps/sandbox/mongodb.git
-#     targetRevision: main
-#   syncPolicy:
-#                 automated:
-#                   prune: true
-#                   selfHeal: true
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: c2d2-mongo
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: c2d2
+    name: in-cluster
+  project: appbundle-project
+  source:
+    path: ./chart
+    repoURL: https://repo1.dso.mil/platform-one/big-bang/apps/sandbox/mongodb.git
+    targetRevision: main
+    helm:
+      parameters:
+        - name: image.tag
+          value: 6.0.1
+  syncPolicy:
+                automated:
+                  prune: true
+                  selfHeal: true
 ---
 
 apiVersion: v1
