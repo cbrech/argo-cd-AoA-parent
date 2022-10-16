@@ -39,7 +39,7 @@ spec:
   project: appbundle-project
   source:
     path: ./chart
-    repoURL: https://repo1.dso.mil/platform-one/big-bang/apps/sandbox/mongodb.git
+    repoURL: https://repo1.dso.mil/platform-one/big-bang/apps/sandbox/mongodb-operator.git
     targetRevision: main
   syncPolicy:
                 automated:
