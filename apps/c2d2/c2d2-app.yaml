@@ -45,6 +45,8 @@ spec:
       parameters:
         - name: image.tag
           value: 6.0.1
+        - name: image.repository
+          value: registry1.dso.mil/ironbank/opensource/mongodb/mongodb
   syncPolicy:
                 automated:
                   prune: true
