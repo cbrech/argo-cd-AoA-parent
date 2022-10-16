@@ -68,3 +68,21 @@ spec:
         port:
           number: 9898
         host: c2d2-app
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+ name: c2d2-mongo
+ namespace: c2d2
+spec:
+  gateways:
+    - istio-system/public
+  hosts:
+   - c2d2-mongo.bigbang.dev
+  http:
+  - route:
+    - destination:
+        port:
+          number: 27017
+        host: c2d2-mongo
