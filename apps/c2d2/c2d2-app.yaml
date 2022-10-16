@@ -22,7 +22,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: c2d2-mongo
+  name: mongodb
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -47,7 +47,7 @@ metadata:
   name: mongodb
 spec:
   selector:
-    app: c2d2-mongo-mongodb
+    app: mongodb
   ports:
   - name: mongodb
     port: 27017
@@ -99,4 +99,4 @@ spec:
     - destination:
         port:
           number: 27017
-        host: c2d2-mongo-mongodb
+        host: mongodb-mongodb
