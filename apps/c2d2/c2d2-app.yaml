@@ -1,23 +1,23 @@
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: c2d2-app
-#   namespace: argocd
-#   finalizers:
-#   - resources-finalizer.argocd.argoproj.io
-# spec:
-#   destination:
-#     namespace: c2d2
-#     name: in-cluster
-#   project: appbundle-project
-#   source:
-#     path: ./chart
-#     repoURL: https://repo1.dso.mil/cbrechbuhl/c2d2.git
-#     targetRevision: main
-#   syncPolicy:
-#                 automated:
-#                   prune: true
-#                   selfHeal: true
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: c2d2-app
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: c2d2
+    name: in-cluster
+  project: appbundle-project
+  source:
+    path: ./chart
+    repoURL: https://repo1.dso.mil/cbrechbuhl/c2d2.git
+    targetRevision: main
+  syncPolicy:
+                automated:
+                  prune: true
+                  selfHeal: true
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
