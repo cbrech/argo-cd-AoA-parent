@@ -44,9 +44,9 @@ spec:
     helm:
       parameters:
         - name: image.tag
-          value: 6.0.1
+          value: latest
         - name: image.repository
-          value: registry1.dso.mil/ironbank/opensource/mongodb/mongodb
+          value: docker.io/library/mongo
   syncPolicy:
                 automated:
                   prune: true
