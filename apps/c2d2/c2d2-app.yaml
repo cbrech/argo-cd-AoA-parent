@@ -86,4 +86,4 @@ spec:
     - destination:
         port:
           number: 27017
-        host: mongodb-mongodb
+        host: mongodb
