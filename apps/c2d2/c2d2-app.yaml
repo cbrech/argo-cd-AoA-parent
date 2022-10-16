@@ -16,10 +16,10 @@ spec:
     targetRevision: main
     helm:
       parameters:
-        - name: ui.color
-          value: "#dddddd"
-        - name: ui.message
-          value: "Hi"
+        - name: LocalSettings__DefaultAuthor
+          value: Hub CWB
+        - name: LocalSettings__DefaultAuthorId
+          value: Hub-CWB
   syncPolicy:
                 automated:
                   prune: true
