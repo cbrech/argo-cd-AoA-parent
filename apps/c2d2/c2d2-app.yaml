@@ -85,4 +85,4 @@ spec:
     - destination:
         port:
           number: 27017
-        host: c2d2-mongo
+        host: c2d2-mongo-mongodb
