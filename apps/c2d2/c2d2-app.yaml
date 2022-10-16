@@ -14,12 +14,6 @@ spec:
     path: ./chart
     repoURL: https://repo1.dso.mil/cbrechbuhl/c2d2.git
     targetRevision: main
-    helm:
-      parameters:
-        - name: LocalSettings__DefaultAuthor
-          value: Hub CWB
-        - name: LocalSettings__DefaultAuthorId
-          value: Hub-CWB
   syncPolicy:
                 automated:
                   prune: true
