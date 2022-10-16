@@ -35,6 +35,8 @@ spec:
     path: ./bitnami/mongodb
     repoURL: https://github.com/bitnami/charts.git
     targetRevision: master
+  auth:
+    enabled: false
   syncPolicy:
                 automated:
                   prune: true
