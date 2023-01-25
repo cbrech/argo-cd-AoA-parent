@@ -15,7 +15,7 @@ spec:
   source:
     path: ./chart
     repoURL: https://repo1.dso.mil/big-bang/apps/sandbox/podinfo.git
-    targetRevision: 6.0.0-bb.4
+    targetRevision: 6.0.0-bb.7
   syncPolicy:
                 automated:
                   prune: true
