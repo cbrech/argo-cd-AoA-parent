@@ -29,11 +29,11 @@ metadata:
 spec:
   destination:
     namespace: c2d2
-    name: in-cluster 
+    name: in-cluster
   project: appbundle-project
   source:
-    path: ./mongodb
-    repoURL: https://charts.bitnami.com/bitnami
+    path: ./bitnami/mongodb
+    repoURL: https://charts.bitnami.com/
     targetRevision: main
     helm:
       parameters:
