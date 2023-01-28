@@ -33,13 +33,16 @@ spec:
   project: appbundle-project
   source:
     path: ./bitnami/mongodb
-    repoURL: https://charts.bitnami.com/
+    repoURL: https://github.com/bitnami/charts.git
     targetRevision: main
     helm:
       parameters:
       - name: auth.enabled
         value: "false"
-
+  syncPolicy:
+                automated:
+                  prune: true
+                  selfHeal: true
 ---
 
 
