@@ -32,8 +32,8 @@ spec:
     name: in-cluster
   project: appbundle-project
   source:
-    path: ./bitnami/mongodb
-    repoURL: https://github.com/bitnami/charts.git
+    path: ./mongodb
+    repoURL: https://charts.bitnami.com/bitnami
     targetRevision: main
     helm:
       parameters:
