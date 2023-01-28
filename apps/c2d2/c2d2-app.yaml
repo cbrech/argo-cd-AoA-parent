@@ -34,7 +34,7 @@ spec:
   source:
     path: ./bitnami/mongodb
     repoURL: https://github.com/bitnami/charts.git
-    targetRevision: master
+    targetRevision: main
     helm:
       parameters:
       - name: auth.enabled
