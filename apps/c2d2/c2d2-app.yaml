@@ -39,10 +39,7 @@ spec:
       parameters:
       - name: auth.enabled
         value: "false"
-  syncPolicy:
-                automated:
-                  prune: true
-                  selfHeal: true
+
 ---
 
 
