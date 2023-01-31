@@ -7,6 +7,9 @@ spec:
   template:
     spec:
       terminationGracePeriodSeconds: 15
+      selector:
+       matchLabels:
+        app: c2d2-app
       containers:
       - name: c2d2
         image: registry.bigbang.dev:5000/c2d2:1.0.5
@@ -32,31 +35,6 @@ spec:
           value: "NUCLEUS_1"
         - name: "LocalSettings__DefaultTags"
           value: "Nucleus1"
-
-
-
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: c2d2-app
-# spec:
-#   replicas: 1
-#   revisionHistoryLimit: 3
-#   selector:
-#     matchLabels:
-#       app: c2d2-app
-#   template:
-#     metadata:
-#       labels:
-#         app: c2d2-app
-#     spec:
-#       imagePullSecrets:
-#       - name: registry-il2
-#       containers:
-#       - image: registry.bigbang.dev:5000/c2d2:1.0.5
-#         name: c2d2-app
-#         ports:
-#         - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
