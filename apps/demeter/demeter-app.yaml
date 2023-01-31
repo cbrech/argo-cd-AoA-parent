@@ -11,7 +11,7 @@ spec:
     name: in-cluster
   project: appbundle-project
   source:
-    path: ./apps/demeter-raw
+    path: ./apps/demeter-chart
     repoURL: https://github.com/cbrech/argo-cd-AoA-parent.git
     targetRevision: HEAD
   syncPolicy:
