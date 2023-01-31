@@ -28,6 +28,8 @@ spec:
           value: "mongodb://mongodb:27017"
         - name: "USE_DEV_JWT"
           value: "true"
+        - name: "ASPNETCORE_ENVIRONMENT"
+          value: "Standalone"
         - name: "C2D2_DEV_USER"
           value: "Admin"
         - name: "Logging__LogLevel__C2D2"
