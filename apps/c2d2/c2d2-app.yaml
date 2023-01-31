@@ -47,5 +47,5 @@ spec:
   - route:
     - destination:
         port:
-          number: 8080
+          number: 80
         host: c2d2-app
