@@ -30,8 +30,10 @@ spec:
           value: "true"
         - name: "ASPNETCORE_ENVIRONMENT"
           value: "Standalone"
-        - name: "levels_DEV_USER"
+        - name: "MOSAIC_DEV_USER"
           value: "Admin"
+        - name: "HOT_RELOAD"
+          value: "false"
         - name: "Logging__LogLevel__MOSAIC"
           value: "Debug"
 ---
