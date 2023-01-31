@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: levels-app
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: levels
+    name: in-cluster
+  project: appbundle-project
+  source:
+    path: ./apps/levels-chart
+    repoURL: https://github.com/cbrech/argo-cd-AoA-parent.git
+    targetRevision: HEAD
+  syncPolicy:
+                automated:
+                  prune: true
+                  selfHeal: true
+
+---
+
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: argocd
+    app.kubernetes.io/name: levels
+    app.kubernetes.io/component: namespace
+  name: levels
+
+---
+
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+ name: levels
+ namespace: levels
+spec:
+  gateways:
+    - istio-system/public
+  hosts:
+   - levels.bigbang.dev
+  http:
+  - route:
+    - destination:
+        port:
+          number: 80
+        host: levels-app

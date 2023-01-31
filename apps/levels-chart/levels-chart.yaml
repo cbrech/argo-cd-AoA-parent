@@ -1,0 +1,131 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: levels-app
+spec:
+  revisionHistoryLimit: 1
+  selector:
+       matchLabels:
+        app: levels-app
+  template:
+    metadata:
+      labels:
+        app: levels-app
+    spec:
+      terminationGracePeriodSeconds: 15
+      containers:
+      - name: levels-app
+        image: registry.bigbang.dev:5000/levels:0.0.2
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        env:
+        - name: DatabaseSettings__DatabaseName
+          value: "levels"
+        - name: "DatabaseSettings__ConnectionString"
+          value: "mongodb://mongodb:27017"
+        - name: "USE_DEV_JWT"
+          value: "true"
+        - name: "ASPNETCORE_ENVIRONMENT"
+          value: "Standalone"
+        - name: "levels_DEV_USER"
+          value: "Admin"
+        - name: "Logging__LogLevel__levels"
+          value: "Warning"
+        - name: "UdlSettings__Endpoint"
+          value: "https://unifieddatalibrary.com/"
+        - name: "UdlSettings__Send"
+          value: "false"
+        - name: "UdlSettings__Receive"
+          value: "false"
+        - name: "UdlSettings__InstanceId"
+          value: "NUCLEUS_1"
+        - name: "LocalSettings__DefaultTags"
+          value: "Nucleus1"
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: levels-app
+spec:
+  selector:
+    app: levels-app
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      imagePullSecrets:
+      - name: private-registry
+      containers:
+      - name: mongodb
+        image: docker.io/mongo:5.0.10
+        imagePullPolicy: "IfNotPresent"
+        env:
+        - name: MONGODB_SYSTEM_LOG_VERBOSITY
+          value: "5"
+        - name: MONGODB_DISABLE_SYSTEM_LOG
+          value: "no"
+        - name: MONGODB_ENABLE_IPV6
+          value: "no"
+        - name: MONGODB_ENABLE_DIRECTORY_PER_DB
+          value: "no"
+        ports:
+        - name: mongo
+          containerPort: 27017
+        livenessProbe:
+          tcpSocket:
+            port: 27017
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 6
+        readinessProbe:
+          tcpSocket:
+            port: 27017
+          initialDelaySeconds: 25
+          periodSeconds: 10
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 6
+        command: ["/usr/bin/mongod"]
+        args: ["--tlsMode", "disabled", "--bind_ip_all"]
+        resources:
+          limits:
+            memory: 2Gi
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+spec:
+  selector:
+    app: mongodb
+  ports:
+  - name: mongo
+    port: 27017
+    targetPort: 27017
+

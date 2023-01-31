@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: levels-app-dev
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: c2d2-dev
+    name: in-cluster
+  project: appbundle-project
+  source:
+    path: ./apps/levels
+    repoURL: https://github.com/cbrech/argo-cd-AoA-parent.git
+    targetRevision: HEAD
+  syncPolicy:
+                automated:
+                  prune: true
+                  selfHeal: true
