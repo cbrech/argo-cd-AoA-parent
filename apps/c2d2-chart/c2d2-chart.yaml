@@ -69,7 +69,7 @@ spec:
         app: c2d2-mongodb
     spec:
       imagePullSecrets:
-      - name: registry-il2
+      - name: private-registry
       containers:
       - name: mongodb
         image: registry1.dso.mil/ironbank/opensource/mongodb/mongodb:5.0.10
