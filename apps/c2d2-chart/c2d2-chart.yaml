@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: c2d2
+  name: c2d2-app
 spec:
   revisionHistoryLimit: 1
   selector:
