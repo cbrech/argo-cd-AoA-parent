@@ -12,17 +12,26 @@ spec:
         image: registry.bigbang.dev:5000/c2d2:1.0.5
         imagePullPolicy: Always
         env:
-        - name: NAMESPACE
-        - DatabaseSettings__DatabaseName: "C2D2"
-        - DatabaseSettings__ConnectionString: "mongodb://mongodb:27017"
-        - USE_DEV_JWT: "true"
-        - C2D2_DEV_USER: "Admin"
-        - Logging__LogLevel__C2D2: "Warning"
-        - UdlSettings__Endpoint: "https://unifieddatalibrary.com/"
-        - UdlSettings__Send: "false"
-        - UdlSettings__Receive: "false"
-        - UdlSettings__InstanceId: "NUCLEUS_1"
-        - LocalSettings__DefaultTags: "Nucleus1"
+        - name: DatabaseSettings__DatabaseName
+          value: "C2D2"
+        - name: "DatabaseSettings__ConnectionString"
+          value: "mongodb://mongodb:27017"
+        - name: "USE_DEV_JWT"
+          value: "true"
+        - name: "C2D2_DEV_USER"
+          value: "Admin"
+        - name: "Logging__LogLevel__C2D2"
+          value: "Warning"
+        - name: "UdlSettings__Endpoint"
+          value: "https://unifieddatalibrary.com/"
+        - name: "UdlSettings__Send"
+          value: "false"
+        - name: "UdlSettings__Receive"
+          value: "false"
+        - name: "UdlSettings__InstanceId"
+          value: "NUCLEUS_1"
+        - name: "LocalSettings__DefaultTags"
+          value: "Nucleus1"
 
 
 
