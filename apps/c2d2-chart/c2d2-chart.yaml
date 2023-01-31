@@ -8,6 +8,10 @@ spec:
        matchLabels:
         app: c2d2-app
   template:
+    metadata:
+      labels:
+        app: c2d2-app
+  template:
     spec:
       terminationGracePeriodSeconds: 15
       containers:
@@ -103,9 +107,7 @@ spec:
         resources:
           limits:
             memory: 2Gi
-        volumeMounts:
-        - name: data
-          mountPath: /data/db 
+
 
 ---
 apiVersion: v1
