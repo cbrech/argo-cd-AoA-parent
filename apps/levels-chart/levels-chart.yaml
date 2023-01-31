@@ -28,6 +28,8 @@ spec:
           value: "mongodb://mongodb:27017"
         - name: "USE_DEV_JWT"
           value: "true"
+        - name: "ASPNETCORE_ENVIRONMENT"
+          value: "Standalone"
         - name: "MOSAIC_DEV_USER"
           value: "Admin"
         - name: "HOT_RELOAD"
