@@ -1,23 +1,36 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: demeter-app
-  namespace: argocd
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
+  name: demeter
 spec:
-  destination:
-    namespace: demeter
-    name: in-cluster
-  project: appbundle-project
-  source:
-    path: ./chart2
-    repoURL: https://repo1.dso.mil/cbrechbuhl/demeter.git
-    targetRevision: main
-  syncPolicy:
-                automated:
-                  prune: true
-                  selfHeal: true
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: demeter
+  template:
+    metadata:
+      labels:
+        app: demeter
+    spec:
+      imagePullSecrets:
+      - name: registry-il2
+      containers:
+      - image: registry.bigbang.dev:5000/demeter:0.0.1
+        name: demeter
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demeter
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: demeter
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
