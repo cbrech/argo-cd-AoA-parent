@@ -15,7 +15,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 15
       containers:
-      - name: c2d2
+      - name: c2d2-app
         image: registry.bigbang.dev:5000/c2d2:1.0.5
         imagePullPolicy: Always
         env:
