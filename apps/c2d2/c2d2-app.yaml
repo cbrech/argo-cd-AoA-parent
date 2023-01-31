@@ -19,30 +19,30 @@ spec:
                   prune: true
                   selfHeal: true
 ---
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: c2d2-mongodb
-  namespace: c2d2
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
-spec:
-  destination:
-    namespace: c2d2
-    name: in-cluster
-  project: appbundle-project
-  source:
-    path: ./bitnami/mongodb
-    repoURL: https://github.com/cbrech/bitnamicharts.git
-    targetRevision: b
-    helm:
-      parameters:
-      - name: auth.enabled
-        value: "false"
-  syncPolicy:
-                automated:
-                  prune: true
-                  selfHeal: true
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: c2d2-mongodb
+#   namespace: c2d2
+#   finalizers:
+#   - resources-finalizer.argocd.argoproj.io
+# spec:
+#   destination:
+#     namespace: c2d2
+#     name: in-cluster
+#   project: appbundle-project
+#   source:
+#     path: ./bitnami/mongodb
+#     repoURL: https://github.com/cbrech/bitnamicharts.git
+#     targetRevision: b
+#     helm:
+#       parameters:
+#       - name: auth.enabled
+#         value: "false"
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
 ---
 
 

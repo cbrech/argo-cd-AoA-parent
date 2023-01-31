@@ -1,3 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: c2d2
+spec:
+  revisionHistoryLimit: 1
+  template:
+    spec:
+      terminationGracePeriodSeconds: 15
+      containers:
+      - name: c2d2
+        image: registry.bigbang.dev:5000/c2d2:1.0.5
+        imagePullPolicy: Always
+        env:
+        - name: NAMESPACE
+        - DatabaseSettings__DatabaseName: "C2D2"
+        - DatabaseSettings__ConnectionString: "mongodb://mongodb:27017"
+        - USE_DEV_JWT: "true"
+        - C2D2_DEV_USER: "Admin"
+        - Logging__LogLevel__C2D2: "Warning"
+        - UdlSettings__Endpoint: "https://unifieddatalibrary.com/"
+        - UdlSettings__Send: "false"
+        - UdlSettings__Receive: "false"
+        - UdlSettings__InstanceId: "NUCLEUS_1"
+        - LocalSettings__DefaultTags: "Nucleus1"
+
+
+
 # apiVersion: apps/v1
 # kind: Deployment
 # metadata:
@@ -27,8 +55,81 @@ metadata:
   name: c2d2-app
 spec:
   ports:
-  - port: 8080
+  - protocol: TCP
+    port: 80
     targetPort: 8080
-  selector:
-    app: c2d2-app
+    name: http
+
 ---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: c2d2-mongodb
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: c2d2-mongodb
+  template:
+    metadata:
+      labels:
+        app: c2d2-mongodb
+    spec:
+      imagePullSecrets:
+      - name: registry-il2
+      containers:
+      - name: mongodb
+        image: registry1.dso.mil/ironbank/opensource/mongodb/mongodb:5.0.10
+        imagePullPolicy: "IfNotPresent"
+        env:
+        - name: MONGODB_SYSTEM_LOG_VERBOSITY
+          value: "5"
+        - name: MONGODB_DISABLE_SYSTEM_LOG
+          value: "no"
+        - name: MONGODB_ENABLE_IPV6
+          value: "no"
+        - name: MONGODB_ENABLE_DIRECTORY_PER_DB
+          value: "no"
+        ports:
+        - name: mongo
+          containerPort: 27017
+        livenessProbe:
+          tcpSocket:
+            port: 27017
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 6
+        readinessProbe:
+          tcpSocket:
+            port: 27017
+          initialDelaySeconds: 25
+          periodSeconds: 10
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 6
+        command: ["/usr/bin/mongod"]
+        args: ["--tlsMode", "disabled", "--bind_ip_all"]
+        resources:
+          limits:
+            memory: 2Gi
+        volumeMounts:
+        - name: data
+          mountPath: /data/db 
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: c2d2-mongodb
+spec:
+  selector:
+    app: c2d2-mongodb
+  ports:
+  - name: mongo
+    port: 27017
+    targetPort: 27017
+
