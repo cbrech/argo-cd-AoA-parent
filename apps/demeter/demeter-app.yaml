@@ -13,7 +13,7 @@ spec:
   source:
     path: ./apps/demeter-raw
     repoURL: https://github.com/cbrech/argo-cd-AoA-parent.git
-    targetRevision: main
+    targetRevision: HEAD
   syncPolicy:
                 automated:
                   prune: true
