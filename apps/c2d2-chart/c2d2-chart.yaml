@@ -35,7 +35,7 @@ spec:
         - name: "Logging__LogLevel__C2D2"
           value: "Warning"
         - name: "UdlSettings__Endpoint"
-          value: "https://unifieddatalibrary.com/"
+          value: "https://test.unifieddatalibrary.com/"
         - name: "UdlSettings__Send"
           value: "false"
         - name: "UdlSettings__Receive"
