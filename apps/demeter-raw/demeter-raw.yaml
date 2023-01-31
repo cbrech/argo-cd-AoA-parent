@@ -7,7 +7,7 @@ spec:
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: demeter-a[[]]
+      app: demeter-app
   template:
     metadata:
       labels:
