@@ -11,9 +11,9 @@ spec:
     name: in-cluster
   project: appbundle-project
   source:
-    path: ./chart2
-    repoURL: https://repo1.dso.mil/cbrechbuhl/c2d2.git
-    targetRevision: main
+    path: ./apps/c2d2-chart
+    repoURL: https://github.com/cbrech/argo-cd-AoA-parent.git
+    targetRevision: HEAD
   syncPolicy:
                 automated:
                   prune: true
