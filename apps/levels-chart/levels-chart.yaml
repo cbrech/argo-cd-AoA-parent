@@ -32,18 +32,8 @@ spec:
           value: "Standalone"
         - name: "levels_DEV_USER"
           value: "Admin"
-        - name: "Logging__LogLevel__levels"
-          value: "Warning"
-        - name: "UdlSettings__Endpoint"
-          value: "https://unifieddatalibrary.com/"
-        - name: "UdlSettings__Send"
-          value: "false"
-        - name: "UdlSettings__Receive"
-          value: "false"
-        - name: "UdlSettings__InstanceId"
-          value: "NUCLEUS_1"
-        - name: "LocalSettings__DefaultTags"
-          value: "Nucleus1"
+        - name: "Logging__LogLevel__MOSAIC"
+          value: "Debug"
 ---
 
 apiVersion: v1
