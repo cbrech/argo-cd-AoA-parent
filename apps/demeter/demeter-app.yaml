@@ -19,32 +19,6 @@ spec:
                   prune: true
                   selfHeal: true
 ---
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: demeter-mongodb
-  namespace: demeter
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
-spec:
-  destination:
-    namespace: demeter
-    name: in-cluster
-  project: appbundle-project
-  source:
-    path: ./bitnami/mongodb
-    repoURL: https://github.com/cbrech/bitnamicharts.git
-    targetRevision: b
-    helm:
-      parameters:
-      - name: auth.enabled
-        value: "false"
-  syncPolicy:
-                automated:
-                  prune: true
-                  selfHeal: true
----
-
 
 apiVersion: v1
 kind: Namespace
