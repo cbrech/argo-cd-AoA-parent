@@ -22,7 +22,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: mongodb
+  name: c2d2-mongodb
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
