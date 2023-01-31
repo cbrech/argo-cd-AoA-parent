@@ -1,0 +1,75 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: demeter-app
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: demeter
+    name: in-cluster
+  project: appbundle-project
+  source:
+    path: ./chart2
+    repoURL: https://repo1.dso.mil/cbrechbuhl/demeter.git
+    targetRevision: main
+  syncPolicy:
+                automated:
+                  prune: true
+                  selfHeal: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: demeter-mongodb
+  namespace: demeter
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: demeter
+    name: in-cluster
+  project: appbundle-project
+  source:
+    path: ./bitnami/mongodb
+    repoURL: https://github.com/cbrech/bitnamicharts.git
+    targetRevision: b
+    helm:
+      parameters:
+      - name: auth.enabled
+        value: "false"
+  syncPolicy:
+                automated:
+                  prune: true
+                  selfHeal: true
+---
+
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: argocd
+    app.kubernetes.io/name: demeter
+    app.kubernetes.io/component: namespace
+  name: demeter
+
+---
+
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+ name: demeter
+ namespace: demeter
+spec:
+  gateways:
+    - istio-system/public
+  hosts:
+   - demeter.bigbang.dev
+  http:
+  - route:
+    - destination:
+        port:
+          number: 80
+        host: demeter
