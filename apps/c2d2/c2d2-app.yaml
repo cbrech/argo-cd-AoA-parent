@@ -72,4 +72,4 @@ spec:
     - destination:
         port:
           number: 80
-        host: c2d2
+        host: c2d2-app
