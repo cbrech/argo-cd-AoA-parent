@@ -16,7 +16,7 @@ spec:
       imagePullSecrets:
       - name: registry-il2
       containers:
-      - image: registry.bigbang.dev:5000/demeter:0.0.3
+      - image: registry.bigbang.dev:5000/demeter:0.0.4
         name: demeter-app
         ports:
         - containerPort: 80
